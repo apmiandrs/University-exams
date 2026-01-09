@@ -10,7 +10,7 @@
 [![Language: Arabic](https://img.shields.io/badge/Language-Arabic-green)](https://github.com/ar)
 [![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-blue)]()
 <br/>
-<a href="https://apmiandrs.github.io/data-analysis/">
+<a href="https://apmiandrs.github.io/University-exams/">
   <img src="https://img.shields.io/badge/Live_Demo-Visit_Site-2ea44f?style=for-the-badge&logo=github&logoColor=white" alt="Live Demo" />
 </a>
 
@@ -21,7 +21,7 @@
 ## 📄 نبذة عن المشروع
 تم تطوير هذا النظام ليكون منصة تعليمية شاملة تجمع مواد تخصص علوم البيانات والذكاء الاصطناعي في مكان واحد. يوفر الموقع واجهة موحدة للوصول إلى اختبارات تفاعلية، واجبات، وأسئلة مراجعة لمختلف المواد الدراسية مثل الذكاء الاصطناعي، تعلم الآلة، تحليل البيانات، وغيرها.
 
-🌐 **لزيارة الموقع وتجربته مباشرة:** [اضغط هنا](https://apmiandrs.github.io/data-analysis/)
+🌐 **لزيارة الموقع وتجربته مباشرة:** [اضغط هنا](https://apmiandrs.github.io/University-exams/)
 
 ## ✨ المميزات الرئيسية
 
