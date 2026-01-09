@@ -1,0 +1,81 @@
+[
+  {
+    "text": "ما هي المقاييس التي يوفرها تقرير التصنيف في sklearn؟",
+    "options": [
+      "Precision، Recall، F1-Score، Support",
+      "Accuracy، Precision، Recall، F1-Score",
+      "Precision، Recall، Accuracy، Support",
+      "Recall، F1-Score، Accuracy، ROC AUC"
+    ],
+    "correct": 0,
+    "hint": "التقرير يعتمد على أربع قيم أساسية لكل فئة في التصنيف."
+  },
+  {
+    "text": "إذا كان لدينا بيانات بها 100 عينه منها 60 من الفئة A و40 من الفئة B وعند بناء نموذج تصنيف قام بتصنيف 50 من الفئة A و35 من الفئة B بشكل صحيح. فما هو عدد TP؟",
+    "options": ["50", "10", "5", "35"],
+    "correct": 0,
+    "hint": "TP يمثل عدد الفئة A التي تم تصنيفها بشكل صحيح."
+  },
+  {
+    "text": "ما هي فائدة ال n_estimators ب random forest؟",
+    "options": [
+      "تحديد عدد السمات المستخدمة في التدريب",
+      "تحديد عدد ال decision trees",
+      "تحديد عدد السمات التي تستخدم في التقييم",
+      "تحديد عدد الفئات"
+    ],
+    "correct": 1,
+    "hint": "هذه القيمة تتحكم في عدد الأشجار داخل الغابة."
+  },
+  {
+    "text": "ما هي وظيفة المعلمة n_neighbors في K-NN؟",
+    "options": [
+      "تحدد عدد النقاط القريبة المستخدمة في التصنيف",
+      "تحدد نوع المسافة المستخدمة في التصنيف",
+      "تحدد عدد الخصائص المستخدمة في التصنيف",
+      "تحدد معدل التعلم"
+    ],
+    "correct": 0,
+    "hint": "كلما زاد هذا العدد زاد تأثير الجيران المحيطين بالنقطة."
+  },
+  {
+    "text": "أي من الخيارات التالية ليس نوعًا من أنواع الـ kernel الشائعة المستخدمة في SVM؟",
+    "options": ["Linear", "Polynomial", "RBF", "Logarithmic"],
+    "correct": 3,
+    "hint": "هذا النوع غير مستخدم في SVM."
+  },
+  {
+    "text": "أي من الدوال التالية تستخدم لتدريب نموذج Naïve Bayes؟",
+    "options": ["predict", "fit", "transform", "score"],
+    "correct": 1,
+    "hint": "جميع النماذج في sklearn تُدرّب بهذه الدالة."
+  },
+  {
+    "text": "ما هو المحور العمودي Y في منحنى ROC؟",
+    "options": [
+      "Sensitivity (True Positive Rate)",
+      "False Positive Rate",
+      "Specificity (True Negative Rate)",
+      "Precision"
+    ],
+    "correct": 0,
+    "hint": "يمثل قدرة النموذج على اكتشاف الحالات الإيجابية."
+  },
+  {
+    "text": "ما هي القيم التي ترجع من الدالة roc_curve في مكتبة scikit-learn؟",
+    "options": [
+      "True Positive Rate, False Positive Rate, Thresholds",
+      "True Negative Rate, False Positive Rate, Thresholds",
+      "False Positive Rate, True Positive Rate, Thresholds",
+      "Precision, Recall, Thresholds"
+    ],
+    "correct": 2,
+    "hint": "ترجع ثلاث قيم أساسية تستخدم لرسم منحنى ROC."
+  },
+  {
+    "text": "إذا كان لدينا بيانات بها 100 عينه منها 60 من الفئة A و40 من الفئة B وعند بناء نموذج تصنيف قام بتصنيف 50 من الفئة A و35 من الفئة B بشكل صحيح. فما هي قيمة Recall؟",
+    "options": ["0.91", "0.83", "0.88", "0.8"],
+    "correct": 1,
+    "hint": "Recall = TP / (TP + FN)."
+  }
+]

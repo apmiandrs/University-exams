@@ -1,0 +1,112 @@
+[
+    {
+        "text": "ما هي الطريقة التي تُستخدم لتحجيم البيانات مع تقليل تأثير القيم المتطرفة؟",
+        "options": [
+            "Standardization",
+            "Normalization",
+            "Min-Max Scaling",
+            "Robust Scaling"
+        ],
+        "correct": 3,
+        "hint": "تُستخدم هذه الطريقة لأنها تعتمد على القيم الربيعية Q1 و Q3 بدلاً من القيم القصوى."
+    },
+    {
+        "text": "ما هو التعريف الشائع للقيم المتطرفة باستخدام نطاق الربيع الداخلي (IQR)؟",
+        "options": [
+            "القيم التي تكون أقل من الربع الأول (Q1) أو أعلى من الربع الثالث (Q3)",
+            "القيم التي تكون أقل من المتوسط أو أعلى من المتوسط",
+            "القيم التي تكون أقل من 1.5 مرة من IQR تحت الربع الأول (Q1) أو أعلى من 1.5 مرة من IQR فوق الربع الثالث (Q3)",
+            "القيم التي تكون أقل من 2.5 مرة من IQR تحت الربع الأول (Q1) أو أعلى من 2.5 مرة من IQR فوق الربع الثالث (Q3)"
+        ],
+        "correct": 2,
+        "hint": "تُعتبر القيم التي تتجاوز 1.5 مرة من IQR خارج نطاق Q1 و Q3 قيمًا متطرفة."
+    },
+    {
+        "text": "ما هو التحليل الذي يُستخدم لتقديم توصيات لتحسين العمليات واتخاذ القرارات؟",
+        "options": [
+            "التحليل الوصفي",
+            "التحليل التنبؤي",
+            "التحليل التشخيصي",
+            "التحليل التوجيهي"
+        ],
+        "correct": 3,
+        "hint": "هو النوع الذي يقدم توصيات وإجراءات مقترحة بناءً على البيانات."
+    },
+    {
+        "text": "كيف يمكنك حذف الصفوف التي تحتوي على قيم مفقودة في DataFrame؟",
+        "options": [
+            "()df.dropna",
+            "()df.remove_na",
+            "()df.delete_na",
+            "df.clean_na()"
+        ],
+        "correct": 0,
+        "hint": "في مكتبة Pandas، تُستخدم الدالة dropna() للتخلص من الصفوف أو الأعمدة التي تحتوي على قيم مفقودة."
+    },
+    {
+        "text": "كيف يمكنك إنشاء line plot في Matplotlib باستخدام قائمة القيم [4, 3, 2, 1] لقيم x و [30, 25, 20, 10] لقيم y؟",
+        "options": [
+            "plt.bar([1, 2, 3, 4], [10, 20, 25, 30])",
+            "plt.pie([15, 25, 35, 25], labels=['A', 'B', 'C', 'D'])",
+            "plt.plot([4, 3, 2, 1], [30, 25, 20, 10])",
+            "plt.boxplot([15, 25, 35, 25], labels=['A', 'B', 'C', 'D'])"
+        ],
+        "correct": 2,
+        "hint": "استخدم plt.plot() عند إنشاء مخطط خطي line plot."
+    },
+    {
+        "text": "كيف يمكنك تغيير أسماء الأعمدة في DataFrame إلى ['A', 'B', 'C']؟",
+        "options": [
+            "df.rename(columns={'A', 'B', 'C'})",
+            "df.columns = ['A', 'B', 'C']",
+            "df.set_columns(['A', 'B', 'C'])",
+            "df.change_columns(['A', 'B', 'C'])"
+        ],
+        "correct": 1,
+        "hint": "لتغيير جميع أسماء الأعمدة دفعة واحدة استخدم خاصية columns مباشرة."
+    },
+    {
+        "text": "كيف يمكنك تخزين DataFrame باسم 'data' في ملف CSV بدون تضمين فهرس الصفوف؟",
+        "options": [
+            "data.to_csv('file.csv', index=True)",
+            "data.to_csv('file.csv', no_index=True)",
+            "data.to_csv('file.csv', index=False)",
+            "data.to_csv('file.csv', no_index=False)"
+        ],
+        "correct": 2,
+        "hint": "استخدم المعامل index=False لمنع كتابة الفهرس داخل ملف CSV."
+    },
+    {
+        "text": "كيف يمكنك إنشاء رسم خطي (line plot) بسيط باستخدام مكتبة Bokeh؟",
+        "options": [
+            "plot.line([1, 2, 3, 4], [10, 20, 25, 30])",
+            "figure.line([1, 2, 3, 4], [10, 20, 25, 30])",
+            "plt.line([1, 2, 3, 4], [10, 20, 25, 30])",
+            "show.line([1, 2, 3, 4], [10, 20, 25, 30])"
+        ],
+        "correct": 1,
+        "hint": "في مكتبة Bokeh نبدأ عادة بإنشاء كائن باستخدام figure ثم نستخدم الدالة line() عليه."
+    },
+    {
+        "text": "أي من المقاييس التالية يُعتبر مقياسًا لتشتت البيانات حول متوسطها؟",
+        "options": [
+            "الانحراف المعياري",
+            "الوسيط",
+            "الوسط الحسابي",
+            "المنوال"
+        ],
+        "correct": 0,
+        "hint": "الانحراف المعياري يقيس مدى انتشار القيم حول المتوسط الحسابي."
+    },
+    {
+        "text": "كيف يمكنك إنشاء Pivot Table في Pandas لعرض مجموع القيم في عمود 'sales' مجمعة حسب عمود 'region'؟",
+        "options": [
+            "pd.DataFrame(df, values='sales', index='region', aggfunc='sum')",
+            "pd.pivot_table(df, values='sales', index='region', aggfunc='sum')",
+            "pd.pivot(df, values='sales', index='region', aggfunc='sum')",
+            "pd.pivot_table(df, values='region', index='sales', aggfunc='sum')"
+        ],
+        "correct": 1,
+        "hint": "الدالة الصحيحة لإنشاء Pivot Table في Pandas هي pd.pivot_table()."
+    }
+]

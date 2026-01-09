@@ -1,0 +1,46 @@
+[
+  {
+    "text": "ما هو الهدف من استخدام SVM (Support Vector Machine) في التصنيف؟",
+    "options": [
+      "تقليل عدد الأبعاد",
+      "تقدير كثافة البيانات",
+      "تحسين دقة النموذج باستخدام تقنيات التحجيم",
+      "تحديد خط فاصل أمثل بين الفئات المختلفة"
+    ],
+    "correct": 3,
+    "hint": "SVM تهدف للعثور على أفضل خط فاصل (Hyperplane) بين الفئات."
+  },
+  {
+    "text": "ما هو العدد المثالي من المجموعات (K) الذي يجب استخدامه في خوارزمية K-means؟",
+    "options": [
+      "يساوي عدد النقاط في البيانات",
+      "يعتمد على التحليل واختبار عدة قيم باستخدام طرق مثل Elbow Method",
+      "يساوي عدد الخصائص في البيانات",
+      "دائماً 3"
+    ],
+    "correct": 1,
+    "hint": "لا يوجد عدد ثابت، يتم تحديد K باستخدام طرق مثل Elbow Method."
+  },
+  {
+    "text": "كيف يمكنك استخدام مكتبة Scikit-learn لتطبيق الانحدار الخطي؟",
+    "options": [
+      "LinearRegression().fit(X, y)",
+      "LogisticRegression().fit(X, y)",
+      "DecisionTreeRegressor().fit(X, y)",
+      "KNeighborsRegressor().fit(X, y)"
+    ],
+    "correct": 0,
+    "hint": "الانحدار الخطي يتم باستخدام كائن LinearRegression."
+  },
+  {
+    "text": "كيف يمكنك استخدام اختبار Chi-squared لاختيار أفضل السمات في مجموعة بيانات؟",
+    "options": [
+      "SelectKBest مع chi2",
+      "PCA مع chi2",
+      "LDA مع chi2",
+      "RFE مع chi2"
+    ],
+    "correct": 0,
+    "hint": "SelectKBest مع chi2 شائع لاختيار السمات ذات العلاقة بالمتغير الهدف."
+  }
+]

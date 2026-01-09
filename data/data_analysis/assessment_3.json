@@ -1,0 +1,112 @@
+[
+  {
+    "text": "أي من المقاييس التالية يُعتبر مقياسًا لتشتت البيانات حول متوسطها؟",
+    "options": ["الانحراف المعياري", "الوسيط", "الوسط الحسابي", "المنوال"],
+    "correct": 0,
+    "hint": "يُقاس به مدى انتشار البيانات حول المتوسط."
+  },
+  {
+    "text": "كيف يمكنك حذف الصفوف التي تحتوي على قيم مفقودة في DataFrame؟",
+    "options": ["df.dropna()", "df.remove_na()", "df.delete_na()", "df.clean_na()"],
+    "correct": 0,
+    "hint": "هي الدالة الأكثر استخدامًا لمعالجة القيم المفقودة."
+  },
+  {
+    "text": "ما هي الطريقة التي تُستخدم لتحجيم البيانات مع تقليل تأثير القيم المتطرفة؟",
+    "options": ["Standardization", "Normalization", "Min-Max Scaling", "Robust Scaling"],
+    "correct": 3,
+    "hint": "تعتمد على الوسيط و IQR بدلاً من المتوسط."
+  },
+  {
+    "text": "ما هي التقنية التي تُستخدم لتقليل Overfitting في نماذج الانحدار؟",
+    "options": ["زيادة عدد الأبعاد", "استخدام معامل التنظيم Regularization", "استخدام التحجيم Normalization", "استخدام مصفوفة الارتباك"],
+    "correct": 1,
+    "hint": "تشمل تقنيات مثل Ridge و Lasso."
+  },
+  {
+    "text": "ما هو التحليل الذي يُستخدم لتقديم توصيات لتحسين العمليات واتخاذ القرارات؟",
+    "options": ["التحليل الوصفي", "التحليل التنبؤي", "التحليل التشخيصي", "التحليل التوجيهي"],
+    "correct": 3,
+    "hint": "هذا التحليل يركز على ما يجب فعله وليس فقط ما حدث."
+  },
+  {
+    "text": "ما هو الفرق بين نموذج التصنيف العشوائي Random Forest وشجرة القرار؟",
+    "options": ["Random Forest يستخدم العديد من أشجار القرار لتحسين الأداء", "Decision Tree يستخدم العديد من الأشجار لتحسين الأداء", "Random Forest يعتمد على الانحدار الخطي", "Decision Tree يعتمد على الانحدار اللوجستي"],
+    "correct": 0,
+    "hint": "هو نموذج تجميعي Ensemble."
+  },
+  {
+    "text": "كيف يمكنك تطبيق اختبار chi-squared لاختيار أفضل 5 سمات باستخدام Scikit-learn؟",
+    "options": ["SelectKBest(pca, k=5).fit_transform(X, y)", "SelectKBest(chi2, k=5).fit_transform(X, y)", "SelectKBest(lda, k=5).fit_transform(X, y)", "SelectKBest(mutual, k=5).fit_transform(X, y)"],
+    "correct": 1,
+    "hint": "الاختبار يعتمد على chi2 لتقييم العلاقة بين السمات والفئة."
+  },
+  {
+    "text": "ما هو التعريف الشائع للقيم المتطرفة باستخدام نطاق الربيع الداخلي (IQR)",
+    "options": [
+      "القيم التي تكون أقل من الربع الأول (Q1) أو أعلى من الربع الثالث (Q3)",
+      "القيم أقل من المتوسط أو أعلى منه",
+      "القيم أقل من 1.5×IQR تحت Q1 أو أعلى منه فوق Q3",
+      "القيم أقل من 2.5×IQR تحت Q1 أو أعلى منه فوق Q3"
+    ],
+    "correct": 2,
+    "hint": "هذا التعريف هو الأكثر استخدامًا في اكتشاف القيم الشاذة."
+  },
+  {
+    "text": "كيف تتعامل DBSCAN مع نقاط الضجيج؟",
+    "options": ["تعينها إلى أقرب مجموعة", "تعتبرها كمجموعة منفصلة", "تعيد توزيعها على المجموعات", "تتجاهلها تماماً"],
+    "correct": 3,
+    "hint": "تظهر كنقاط لا تنتمي لأي عنقود."
+  },
+  {
+    "text": "كيف يمكنك تخزين DataFrame في ملف CSV بدون تضمين الفهرس؟",
+    "options": ["data.to_csv('file.csv', index=True)", "data.to_csv('file.csv', no_index=True)", "data.to_csv('file.csv', index=False)", "data.to_csv('file.csv', no_index=False)"],
+    "correct": 2,
+    "hint": "إضافة index=False تمنع كتابة رقم الصف."
+  },
+  {
+    "text": "كيف يمكنك تغيير أسماء الأعمدة في DataFrame إلى ['A', 'B', 'C']؟",
+    "options": ["df.rename(columns={'A','B','C'})", "df.columns = ['A', 'B', 'C']", "df.set_columns(['A','B','C'])", "df.change_columns(['A','B','C'])"],
+    "correct": 1,
+    "hint": "هي الطريقة المباشرة والأكثر شيوعاً."
+  },
+  {
+    "text": "كيف يمكنك تطبيق PCA باستخدام Scikit-learn؟",
+    "options": ["PCA().fit_transform(X)", "SelectKBest().fit_transform(X)", "MinMaxScaler().fit_transform(X)", "StandardScaler().fit_transform(X)"],
+    "correct": 0,
+    "hint": "هذه الدالة تُجري تخفيض الأبعاد مباشرة."
+  },
+  {
+    "text": "كيف يمكنك إنشاء line plot في Matplotlib باستخدام x=[4,3,2,1] و y=[30,25,20,10]؟",
+    "options": [
+      "plt.bar([1,2,3,4],[10,20,25,30])",
+      "plt.pie([15,25,35,25], labels=['A','B','C','D'])",
+      "plt.plot([4,3,2,1], [30,25,20,10])",
+      "plt.boxplot([15,25,35,25], labels=['A','B','C','D'])"
+    ],
+    "correct": 2,
+    "hint": "الرسم الخطي يتم باستخدام plot()."
+  },
+  {
+    "text": "كيف يمكنك إنشاء Pivot Table في Pandas لعرض مجموع القيم في عمود 'sales' مجمعة حسب 'region'؟",
+    "options": [
+      "pd.DataFrame(df, values='sales', index='region', aggfunc='sum')",
+      "pd.pivot_table(df, values='sales', index='region', aggfunc='sum')",
+      "pd.pivot(df, values='sales', index='region', aggfunc='sum')",
+      "pd.pivot_table(df, values='region', index='sales', aggfunc='sum')"
+    ],
+    "correct": 1,
+    "hint": "pivot_table هي الطريقة الرسمية للتجميع."
+  },
+  {
+    "text": "كيف يمكنك إنشاء رسم خطي (line plot) بسيط باستخدام مكتبة Bokeh؟",
+    "options": [
+      "plot.line([1,2,3,4],[10,20,25,30])",
+      "figure.line([1,2,3,4],[10,20,25,30])",
+      "plt.line([1,2,3,4],[10,20,25,30])",
+      "show.line([1,2,3,4],[10,20,25,30])"
+    ],
+    "correct": 1,
+    "hint": "الوظيفة الأساسية في Bokeh تبدأ بـ figure()."
+  }
+]

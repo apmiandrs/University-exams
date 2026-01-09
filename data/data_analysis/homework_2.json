@@ -1,0 +1,35 @@
+[
+  {
+    "text": "كيف يمكنك حساب عدد القيم المفقودة في كل عمود في DataFrame؟",
+    "options": [
+      "df.isnull().sum()",
+      "df.missing().count()",
+      "df.isnan().sum()",
+      "df.empty().count()"
+    ],
+    "correct": 0,
+    "hint": "تستخدم دوال isnull و sum لحساب القيم المفقودة."
+  },
+  {
+    "text": "ما هي الطريقة الصحيحة لإضافة أداة التحريك (Pan Tool) وأداة التكبير (Wheel Zoom Tool) إلى الرسم البياني في Bokeh؟",
+    "options": [
+      "figure.set_tools(PanTool(), WheelZoomTool())",
+      "figure.enable_tools(PanTool(), WheelZoomTool())",
+      "figure.tools(PanTool(), WheelZoomTool())",
+      "figure.add_tools(PanTool(), WheelZoomTool())"
+    ],
+    "correct": 3,
+    "hint": "في مكتبة Bokeh نستخدم add_tools لإضافة أدوات جديدة للرسم."
+  },
+  {
+    "text": "كيف يمكنك تغيير حجم النقاط في scatter plot بناءً على قيم معينة؟",
+    "options": [
+      "plt.scatter(..., s=5)",
+      "plt.scatter(..., size=variable)",
+      "plt.scatter(..., scale=variable)",
+      "plt.scatter(..., width=variable)"
+    ],
+    "correct": 0,
+    "hint": "المعامل s في scatter يُستخدم للتحكم في حجم النقاط ويمكن ربطه بقيم."
+  }
+]

@@ -1,0 +1,101 @@
+[
+    {
+        "text": "الشكل الشرطي للعبارة (Everyone who is lucky win the prize).",
+        "options": [
+            "∀X: Lucky (X) → win (X, prize)",
+            "¬Lucky (Z) ∨ win (Z, prize)",
+            "∀X: win (X, prize) → Lucky (X)",
+            "Lucky (X) → ¬win (X, prize)"
+        ],
+        "correct": 1,
+        "hint": "في المنطق الرمزي، 'كل من هو محظوظ يفوز بالجائزة' تعني أن الصفة Lucky(X) تستلزم win(X, prize)."
+    },
+    {
+        "text": "توزيع وتبسيط العبارة (P Ʌ Q)¬ : .............",
+        "options": [
+            "¬P ∨ ¬Q",
+            "¬P Ʌ ¬Q",
+            "P ∨ Q",
+            "¬(P ∨ Q)"
+        ],
+        "correct": 0,
+        "hint": "استخدم قانون دي مورغان (De Morgan’s Law): نفي الاقتران يتحول إلى فصل بين النفيين."
+    },
+    {
+        "text": "............. : ¬∃X: P(x)   نفي العبارة",
+        "options": [
+            "¬∀X: ¬P(x)",
+            "∀X: ¬P(x)",
+            "¬∃X: ¬P(x)",
+            "∃X: ¬P(x)"
+        ],
+        "correct": 1,
+        "hint": "تذكر أن نفي الوجودي (∃) يتحول إلى كلي (∀) مع نفي داخل العبارة."
+    },
+    {
+        "text": "............. :  ¬(P Ʌ ¬Q) توزيع وتبسيط العبارة",
+        "options": [
+            "¬P ∨ Q",
+            "¬P Ʌ ¬Q",
+            "P ∨ ¬Q",
+            "¬(¬P ∨ Q)"
+        ],
+        "correct": 0,
+        "hint": "طبق قانون دي مورغان على النفي المزدوج لتبسيط التعبير."
+    },
+    {
+        "text": "المنطق من الدرجة الأولى للعبارة (Everyone passing his AI exam and wining the prize is happy).",
+        "options": [
+            "∀X: pass (X, ai-exam) Ʌ win (X, prize) → happy (X)",
+            "∀X: pass (X, ai-exam) Ʌ win (X, prize) Ʌ happy (X)",
+            "∀X: happy (X) → pass (X, ai-exam) Ʌ win (X, prize)",
+            "∃X: pass (X, ai-exam) Ʌ win (X, prize) → happy (X)"
+        ],
+        "correct": 0,
+        "hint": "في هذه العبارة، 'كل من نجح وفاز سعيد' تعني أن النجاح والفوز يؤديان إلى السعادة."
+    },
+    {
+        "text": "نفي العبارة X: P(x)∀¬ : .............",
+        "options": [
+            "¬∃X: ¬P(x)",
+            "∃X: ¬P(x)",
+            "¬∀X: P(x)",
+            "∀X: ¬P(x)"
+        ],
+        "correct": 1,
+        "hint": "نفي الكلية (∀) ينتج وجودي (∃) مع نفي داخل العبارة."
+    },
+    {
+        "text": "........... :  ¬(¬Q Ʌ P Ʌ Q) توزيع وتبسيط العبارة",
+        "options": [
+            "Q ∨ ¬P ∨ ¬Q",
+            "¬P Ʌ ¬Q",
+            "¬P ∨ Q",
+            "P ∨ Q"
+        ],
+        "correct": 0,
+        "hint": "استخدم قوانين دي مورغان لإزالة النفي عن الاقتران المركب."
+    },
+    {
+        "text": "نفي العبارة  X: P(x)∃¬ : .............",
+        "options": [
+            "¬∀X: ¬P(x)",
+            "∀X: ¬P(x)",
+            "¬∃X: ¬P(x)",
+            "∃X: ¬P(x)"
+        ],
+        "correct": 1,
+        "hint": "نفي الوجودي (∃) يعطينا نفي كلي (∀) مع نفي داخل العبارة."
+    },
+    {
+        "text": "المنطق من الدرجة الأولى للعبارة (Ali did not study, and he is lucky).",
+        "options": [
+            "¬study (Ali) ∨ lucky (Ali)",
+            "¬study (Ali) Ʌ lucky (Ali)",
+            "study (Ali) Ʌ lucky (Ali)",
+            "¬study (Ali) → lucky (Ali)"
+        ],
+        "correct": 1,
+        "hint": "العبارة تحتوي على 'و' المنطقية، أي اقتران بين النفي والصفة."
+    }
+]

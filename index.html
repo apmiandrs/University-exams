@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="نظام الاختبارات الجامعية الشامل - تدرب واختبر معرفتك في مختلف المواد الدراسية">
+    <title>نظام الاختبارات الجامعية الشامل</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#5b7cff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+
+    <!-- Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+    <!-- Floating Action Buttons -->
+    <div class="theme-toggle" id="themeToggle" title="تبديل الوضع الليلي">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <div class="sound-toggle" id="soundToggle" title="تفعيل/إيقاف الصوت">
+         <i class="fas fa-volume-up"></i>
+    </div>
+
+    <div class="home-button" id="homeButton" title="القائمة الرئيسية">
+        <i class="fas fa-home"></i>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 id="pageTitle">نظام الاختبارات الشامل</h1>
+            <p id="subjectTitle">اختر المادة للبدء</p>
+        </div>
+
+        <!-- ================= APP HOME PAGE (Subject Selection) ================= -->
+        <div id="appHomePage">
+            <div class="hero-illustration" style="text-align: center; margin-bottom: 2rem;">
+                <img src="assets/images/quiz_illustration_ai.png" alt="Quiz Illustration" style="max-width: 250px; opacity: 0.9;">
+            </div>
+            
+            <div id="subjectGrid" class="subject-grid">
+                <!-- Subject Cards injected via JS -->
+                <div class="loading">جاري تحميل المواد...</div>
+            </div>
+        </div>
+
+        <!-- ================= SUBJECT PAGE (Quiz Interface) ================= -->
+        <div id="subjectPage" style="display: none;">
+            
+            <!-- File Selector -->
+            <div class="file-selector" id="fileSelector">
+                <div class="select-group">
+                    <div class="select-wrapper">
+                        <label for="fileType" class="select-label">
+                            <i class="fas fa-list-ul"></i> نوع الاختبار
+                        </label>
+                        <select id="fileType">
+                            <option value="test">الاختبار الذاتي</option>
+                            <option value="assessment">الأسئلة الذاتية</option>
+                            <option value="homework">الواجبات</option>
+                            <option value="random">اختبار عشوائي (50 سؤال - 70 درجة)</option>
+                        </select>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <label for="fileNumber" class="select-label">
+                            <i class="fas fa-hashtag"></i> رقم الاختبار
+                        </label>
+                        <select id="fileNumber">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn" id="startBtn" onclick="loadQuiz()">
+                        <i class="fas fa-play-circle"></i> بدء الاختبار
+                    </button>
+                    <!-- Additional buttons can go here -->
+                </div>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>جاري تحميل الأسئلة...</p>
+            </div>
+
+            <!-- Timer & Progress -->
+            <div id="timerContainer" style="display: none; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; color: var(--primary-color);">
+                <i class="far fa-clock" style="margin-left: 10px;"></i>
+                <span id="timer">00:00</span>
+            </div>
+
+            <div id="progressContainer" class="progress-container" style="display: none; margin-bottom: 20px;">
+                <div class="progress-header">
+                    <span>التقدم</span>
+                    <span id="progressPercentage">0%</span>
+                </div>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Questions Area -->
+            <div id="questions"></div>
+
+            <!-- Stats Bar -->
+            <div class="stats" id="stats" style="display: none;">
+                <div class="stat-item">
+                    <span class="stat-value" id="score">0</span>
+                    <span class="stat-label">الدرجة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="total">0</span>
+                    <span class="stat-label">المجموع</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="correctCount">0</span>
+                    <span class="stat-label">صحيحة</span>
+                </div>
+            </div>
+
+            <!-- Finish Button -->
+            <button class="btn" id="finishButton" onclick="showResults()" style="display: none; margin-top: 20px;">
+                <i class="fas fa-flag-checkered"></i> إنهاء الاختبار
+            </button>
+            
+            <button class="btn btn-secondary" id="backButton" style="display: none; margin-top: 10px;">
+                 <i class="fas fa-arrow-right"></i> عودة للقائمة
+            </button>
+
+            <!-- Results Page -->
+            <div id="resultsPage" style="display: none; animation: fadeIn 0.5s ease;">
+                <div class="header">
+                    <h2>نتيجة الاختبار</h2>
+                    <p id="scoreMessage">ممتاز!</p>
+                </div>
+                
+                <div class="score-circle" style="text-align: center; margin: 20px 0;">
+                    <h1 id="scorePercentage" style="font-size: 4rem; color: var(--primary-color);">0%</h1>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="resultsChart"></canvas>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-value" id="resultCorrectCount" style="color: var(--correct-color)">0</span>
+                        <span>إجابات صحيحة</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="resultWrongCount" style="color: var(--wrong-color)">0</span>
+                        <span>إجابات خاطئة</span>
+                    </div>
+                    <!-- Time STATS could be added here -->
+                </div>
+
+                <div class="action-buttons">
+                     <button class="btn" id="reviewBtn">
+                        <i class="fas fa-search"></i> مراجعة الإجابات
+                    </button>
+                    <button class="btn" id="retryBtn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <i class="fas fa-redo"></i> المحاولة مرة أخرى
+                    </button>
+                    <button class="btn btn-secondary" id="newQuizBtn">
+                        <i class="fas fa-list"></i> اختبار جديد
+                    </button>
+                </div>
+            </div>
+
+            <!-- Review Page -->
+            <div id="reviewPage" style="display: none; animation: slideIn 0.3s ease;">
+                <div class="header">
+                    <h2>مراجعة الإجابات</h2>
+                </div>
+                <div id="reviewContainer"></div>
+                <button class="btn" id="backToResultsBtn" style="margin-top: 20px;">
+                    <i class="fas fa-arrow-right"></i> عودة للنتائج
+                </button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="copyright">
+                © 2024 نظام الاختبارات الجامعية الشامل إصدار 2.1 <br>
+                تم التطوير للمساعدة في التفوق الدراسي
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
