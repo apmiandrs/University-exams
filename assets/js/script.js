@@ -43,7 +43,13 @@ async function loadSubjects() {
         renderSubjectGrid();
     } catch (error) {
         console.error(error);
-        subjectGrid.innerHTML = `<p class="error-msg">حدث خطأ في تحميل المواد. يرجى تحديث الصفحة.</p>`;
+        subjectGrid.innerHTML = `
+            <div class="error-msg" style="text-align: center; color: #ef4444; padding: 20px;">
+                <p>حدث خطأ في تحميل المواد.</p>
+                <p style="font-size: 0.8rem; direction: ltr;">${error.message}</p>
+                <p>يرجى التأكد من رفع مجلد "data" بشكل صحيح إلى GitHub.</p>
+                <button class="btn" onclick="location.reload()" style="margin-top: 10px; width: auto; display: inline-flex;">تحديث الصفحة</button>
+            </div>`;
     }
 }
 
@@ -366,13 +372,19 @@ homeButton.addEventListener('click', async () => {
     }
 });
 
-// Original Audio Context logic (simplified)
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+// Original Audio Context logic (lazy init)
+let audioCtx;
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
 function playCorrectSound() {
-    // Implementation omitted for brevity, stick to simple beep or original logic
-    // Using simple oscillator
     if (localStorage.getItem('soundEnabled') === 'false') return;
     try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.connect(gain);
@@ -381,11 +393,14 @@ function playCorrectSound() {
         gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.1);
-    } catch (e) { }
+    } catch (e) { console.warn('Audio error', e); }
 }
+
 function playWrongSound() {
     if (localStorage.getItem('soundEnabled') === 'false') return;
     try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.connect(gain);
@@ -394,7 +409,7 @@ function playWrongSound() {
         gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.2);
-    } catch (e) { }
+    } catch (e) { console.warn('Audio error', e); }
 }
 
 // Results logic
