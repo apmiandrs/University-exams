@@ -1,0 +1,37 @@
+[
+    {
+        "id": "ai",
+        "name": "الذكاء الاصطناعي",
+        "dataPath": "data/ai",
+        "image": "assets/images/quiz_illustration_ai.png",
+        "description": "مادة الذكاء الاصطناعي - تدرب واختبر معرفتك"
+    },
+    {
+        "id": "applied_ml",
+        "name": "تعلم الآلة التطبيقي",
+        "dataPath": "data/applied_ml",
+        "image": "assets/images/quiz_illustration_applied_ml.png",
+        "description": "مادة تعلم الآلة التطبيقي - تدرب واختبر معرفتك"
+    },
+    {
+        "id": "data_analysis",
+        "name": "تحليل وتمثيل البيانات",
+        "dataPath": "data/data_analysis",
+        "image": "assets/images/quiz_illustration_data_analysis.png",
+        "description": "مادة تحليل وتمثيل البيانات - تدرب واختبر معرفتك"
+    },
+    {
+        "id": "data_security",
+        "name": "أمن البيانات والخصوصية",
+        "dataPath": "data/data_security",
+        "image": "assets/images/quiz_illustration_data_security.png",
+        "description": "مادة أمن البيانات والخصوصية - تدرب واختبر معرفتك"
+    },
+    {
+        "id": "data_topics",
+        "name": "موضوعات مختارة في علوم البيانات",
+        "dataPath": "data/data_topics",
+        "image": "assets/images/quiz_illustration_data_topics.png",
+        "description": "مادة موضوعات مختارة في علوم البيانات - تدرب واختبر معرفتك"
+    }
+]
