@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="نظام الاختبارات الجامعية الشامل - تدرب واختبر معرفتك في مختلف المواد الدراسية">
     <title>نظام الاختبارات الجامعية الشامل</title>
-    
+
     <!-- PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#5b7cff">
@@ -18,15 +19,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
 
     <!-- Floating Action Buttons -->
     <div class="theme-toggle" id="themeToggle" title="تبديل الوضع الليلي">
         <i class="fas fa-moon"></i>
     </div>
-    
+
     <div class="sound-toggle" id="soundToggle" title="تفعيل/إيقاف الصوت">
-         <i class="fas fa-volume-up"></i>
+        <i class="fas fa-volume-up"></i>
     </div>
 
     <div class="home-button" id="homeButton" title="القائمة الرئيسية">
@@ -43,9 +45,24 @@
         <!-- ================= APP HOME PAGE (Subject Selection) ================= -->
         <div id="appHomePage">
             <div class="hero-illustration" style="text-align: center; margin-bottom: 2rem;">
-                <img src="assets/images/University-exams.png" alt="Quiz Illustration" style="max-width: 250px; opacity: 0.9;">
+                <img src="assets/images/University-exams.png" alt="Quiz Illustration"
+                    style="max-width: 250px; opacity: 0.9;">
             </div>
-            
+
+            <div class="search-container" style="max-width: 600px; margin: 0 auto 30px; position: relative;">
+                <input type="text" id="subjectSearch" placeholder="ابحث عن مادة..." class="search-input"
+                    style="width: 100%; padding: 15px 50px 15px 20px; border-radius: 50px; border: 2px solid var(--border-color); background: var(--card-bg); color: var(--text-color); font-family: inherit; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <i class="fas fa-search"
+                    style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 1.2rem;"></i>
+            </div>
+
+            <div class="actions-bar" style="text-align: center; margin-bottom: 30px;">
+                <button class="btn btn-secondary" onclick="showHistoryModal()"
+                    style="border-radius: 50px; padding: 10px 25px;">
+                    <i class="fas fa-history"></i> سجل الاختبارات
+                </button>
+            </div>
+
             <div id="subjectGrid" class="subject-grid">
                 <!-- Subject Cards injected via JS -->
                 <div class="loading">جاري تحميل المواد...</div>
@@ -54,7 +71,7 @@
 
         <!-- ================= SUBJECT PAGE (Quiz Interface) ================= -->
         <div id="subjectPage" style="display: none;">
-            
+
             <!-- File Selector -->
             <div class="file-selector" id="fileSelector">
                 <div class="select-group">
@@ -95,7 +112,8 @@
             </div>
 
             <!-- Timer & Progress -->
-            <div id="timerContainer" style="display: none; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; color: var(--primary-color);">
+            <div id="timerContainer"
+                style="display: none; justify-content: center; font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; color: var(--primary-color);">
                 <i class="far fa-clock" style="margin-left: 10px;"></i>
                 <span id="timer">00:00</span>
             </div>
@@ -133,9 +151,9 @@
             <button class="btn" id="finishButton" onclick="showResults()" style="display: none; margin-top: 20px;">
                 <i class="fas fa-flag-checkered"></i> إنهاء الاختبار
             </button>
-            
+
             <button class="btn btn-secondary" id="backButton" style="display: none; margin-top: 10px;">
-                 <i class="fas fa-arrow-right"></i> عودة للقائمة
+                <i class="fas fa-arrow-right"></i> عودة للقائمة
             </button>
 
             <!-- Results Page -->
@@ -144,7 +162,7 @@
                     <h2>نتيجة الاختبار</h2>
                     <p id="scoreMessage">ممتاز!</p>
                 </div>
-                
+
                 <div class="score-circle" style="text-align: center; margin: 20px 0;">
                     <h1 id="scorePercentage" style="font-size: 4rem; color: var(--primary-color);">0%</h1>
                 </div>
@@ -166,7 +184,7 @@
                 </div>
 
                 <div class="action-buttons">
-                     <button class="btn" id="reviewBtn">
+                    <button class="btn" id="reviewBtn">
                         <i class="fas fa-search"></i> مراجعة الإجابات
                     </button>
                     <button class="btn" id="retryBtn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
@@ -189,7 +207,7 @@
                 </button>
             </div>
         </div>
-        
+
         <!-- Footer -->
         <div class="footer">
             <div class="copyright">
@@ -199,9 +217,28 @@
         </div>
     </div>
 
+    <!-- History Modal -->
+    <div id="historyModal" class="modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div class="modal-content"
+            style="background: var(--card-bg); width: 90%; max-width: 600px; max-height: 80vh; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; animation: slideUp 0.3s ease;">
+            <div class="modal-header"
+                style="padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="margin: 0;">سجل الاختبارات</h2>
+                <button onclick="closeHistoryModal()"
+                    style="background: none; border: none; font-size: 1.5rem; color: var(--text-secondary); cursor: pointer;">&times;</button>
+            </div>
+            <div class="modal-body" id="historyList" style="padding: 20px; overflow-y: auto;">
+                <!-- History items injected here -->
+                <p style="text-align: center; color: var(--text-secondary);">لا يوجد سجل اختبارات حتى الآن.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>

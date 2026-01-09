@@ -9,6 +9,41 @@ let startTime = null;
 let elapsedTime = 0;
 let timerInterval = null;
 const APP_VERSION = '2.1.0';
+let progressManager = {
+    saveResult: function(subjectId, fileType, fileNumber, score, total) {
+        const history = this.getHistory();
+        const result = {
+            date: new Date().toISOString(),
+            subjectId,
+            subjectName: subjectsData.find(s => s.id === subjectId)?.name || subjectId,
+            fileType,
+            fileNumber,
+            score,
+            total,
+            percentage: Math.round((score/total)*100)
+        };
+        history.unshift(result);
+        localStorage.setItem('quizHistory', JSON.stringify(history)); // Store all history
+        
+        // Also update 'best scores' map for quick lookup
+        const bestScores = this.getBestScores();
+        const key = `${subjectId}_${fileType}_${fileNumber}`;
+        if (!bestScores[key] || result.percentage > bestScores[key]) {
+            bestScores[key] = result.percentage;
+            localStorage.setItem('quizBestScores', JSON.stringify(bestScores));
+        }
+    },
+    getHistory: function() {
+        return JSON.parse(localStorage.getItem('quizHistory') || '[]');
+    },
+    getBestScores: function() {
+        return JSON.parse(localStorage.getItem('quizBestScores') || '{}');
+    },
+    getBestScore: function(subjectId, fileType, fileNumber) {
+        const bestScores = this.getBestScores();
+        return bestScores[`${subjectId}_${fileType}_${fileNumber}`];
+    }
+};
 
 // عناصر DOM
 const appHomePage = document.getElementById('appHomePage');
@@ -33,6 +68,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // التحقق من وجود "موضوع محفوظ" في السابق (اختياري)
     // حالياً سنبدأ دائماً من القائمة الرئيسية
+    
+    // Search Listener
+    document.getElementById('subjectSearch').addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = subjectsData.filter(s => s.name.toLowerCase().includes(term));
+        renderSubjectGrid(filtered);
+    });
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', handleKeyboardShortcuts);
 });
 
 async function loadSubjects() {
@@ -53,9 +98,13 @@ async function loadSubjects() {
     }
 }
 
-function renderSubjectGrid() {
+function renderSubjectGrid(data = subjectsData) {
     subjectGrid.innerHTML = '';
-    subjectsData.forEach(subject => {
+    if (data.length === 0) {
+        subjectGrid.innerHTML = '<p style="text-align: center; width: 100%; color: var(--text-secondary);">لا توجد مواد مطابقة للبحث.</p>';
+        return;
+    }
+    data.forEach(subject => {
         const card = document.createElement('div');
         card.className = 'subject-card';
         card.onclick = () => selectSubject(subject.id);
@@ -125,7 +174,8 @@ function updateFileNumbers() {
     for (let i = 1; i <= maxNumber; i++) {
         const option = document.createElement('option');
         option.value = i;
-        option.textContent = `رقم ${i}`;
+        const best = progressManager.getBestScore(currentSubject.id, fileType, i);
+        option.textContent = `رقم ${i} ${best !== undefined ? `(🏆 ${best}%)` : ''}`;
         fileNumberSelect.appendChild(option);
     }
 }
@@ -276,6 +326,12 @@ function renderQuestions() {
             </div>
             <div id="feedback-${index}" class="feedback-container"></div>
         `;
+        // Add tabindex to allow focus
+        div.tabIndex = 0;
+        div.addEventListener('click', () => {
+             // Optional: visual indication of focus? 
+             // Browser default outline is usually enough, but we can enhance in CSS
+        });
         questionsContainer.appendChild(div);
     });
 }
@@ -308,6 +364,12 @@ function selectAnswer(qIndex, optIndex) {
             ${q.hint ? `<p>تلميح: ${q.hint}</p>` : ''}
         </div>
     `;
+
+    // Remove focus ability after answering to skip it in tab navigation? 
+    // Maybe better to keep it so user can review.
+    
+    // Auto-scroll logic or focus next?
+    // Let's rely on shortcuts for navigation.
 
     // Sound
     if (isCorrect) playCorrectSound();
@@ -445,7 +507,104 @@ window.showResults = function () { // Expose to global for HTML button
     }
 
     if (pct > 70 && window.confetti) window.confetti();
+
+    // SAVE PROGRESS
+    if (currentSubject) {
+        progressManager.saveResult(
+            currentSubject.id, 
+            document.getElementById('fileType').value, 
+            document.getElementById('fileNumber').value, 
+            score, 
+            quizData.length
+        );
+    }
 };
+
+// ==================== KEYBOARD SHORTCUTS ====================
+function handleKeyboardShortcuts(e) {
+    // Only active if quiz is visible and no modals are open
+    if (questionsContainer.style.display === 'none' && subjectPage.style.display !== 'block') return;
+    if (document.getElementById('resultsPage').style.display === 'block') return;
+    
+    const key = e.key;
+    
+    // Check if a question is focused
+    const focusedElement = document.activeElement;
+    const isQuestionFocused = focusedElement.classList.contains('question');
+    
+    if (isQuestionFocused) {
+        // Find index
+        const index = Array.from(questionsContainer.children).indexOf(focusedElement);
+        if (index === -1) return;
+
+        if (['1', '2', '3', '4'].includes(key)) {
+            e.preventDefault();
+            const optionIndex = parseInt(key) - 1;
+            // Check if option exists
+            if (quizData[index].options[optionIndex]) {
+                 selectAnswer(index, optionIndex);
+            }
+        } else if (key === 'Enter') {
+            e.preventDefault();
+            // Move to next question
+            const nextQuestion = questionsContainer.children[index + 1];
+            if (nextQuestion) {
+                nextQuestion.focus();
+                nextQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                // If last question, maybe show finish button?
+                document.getElementById('finishButton').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+}
+
+// Global functions for HTML access
+window.showHistoryModal = function() {
+    const modal = document.getElementById('historyModal');
+    const list = document.getElementById('historyList');
+    const history = progressManager.getHistory();
+    
+    modal.style.display = 'flex';
+    
+    if (history.length === 0) {
+        list.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">لا يوجد سجل اختبارات حتى الآن.</p>';
+        return;
+    }
+    
+    list.innerHTML = history.map(h => `
+        <div class="history-item" style="background: var(--bg-color); padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h4 style="margin: 0; color: var(--primary-color);">${h.subjectName}</h4>
+                <p style="margin: 5px 0; font-size: 0.9rem; color: var(--text-secondary);">
+                    ${getQuizTypeName(h.fileType)} #${h.fileNumber}
+                </p>
+                <small style="color: var(--text-secondary); opacity: 0.7;">${new Date(h.date).toLocaleDateString('ar-SA')}</small>
+            </div>
+            <div style="text-align: center;">
+                <span style="display: block; font-size: 1.2rem; font-weight: bold; color: ${h.percentage >= 60 ? 'var(--correct-color)' : 'var(--wrong-color)'}">
+                    ${h.percentage}%
+                </span>
+                <span style="font-size: 0.8rem;">${h.score}/${h.total}</span>
+            </div>
+        </div>
+    `).join('');
+};
+
+window.closeHistoryModal = function() {
+    document.getElementById('historyModal').style.display = 'none';
+};
+
+// Helper for history display
+function getQuizTypeName(type) {
+    const map = {
+        'test': 'اختبار ذاتي',
+        'assessment': 'أسئلة ذاتية',
+        'homework': 'واجب',
+        'random': 'عشوائي'
+    };
+    return map[type] || type;
+}
 
 document.getElementById('retryBtn').addEventListener('click', () => {
     document.getElementById('resultsPage').style.display = 'none';
